@@ -1,6 +1,6 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
-Version: 0.6
+Version: 0.6b
 Release: 1%{?dist}
 License: GPL
 Group: Development/Tools
@@ -34,6 +34,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Jul 12 2005 Jeremy Katz <katzj@redhat.com> - 0.6b
+- update to new upstream 0.6b
+
 * Fri Jul  1 2005 Jeremy Katz <katzj@redhat.com> - 0.6-1
 - Initial build.
 
