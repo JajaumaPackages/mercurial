@@ -1,6 +1,6 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
-Version: 0.6b
+Version: 0.6c
 Release: 1%{?dist}
 License: GPL
 Group: Development/Tools
@@ -30,10 +30,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.files
 %defattr(-,root,root,-)
-%doc doc/FAQ.txt README doc/hg.1.txt
+%doc README doc/hg.1.txt doc/hgmerge.1.txt doc/hgrc.5.txt
 
 
 %changelog
+* Mon Aug 22 2005 Jeremy Katz <katzj@redhat.com> - 0.6c
+- update to 0.6c
+
 * Tue Jul 12 2005 Jeremy Katz <katzj@redhat.com> - 0.6b
 - update to new upstream 0.6b
 
