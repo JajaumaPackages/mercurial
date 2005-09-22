@@ -30,10 +30,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.files
 %defattr(-,root,root,-)
-%doc README doc/hg.1.txt doc/hgmerge.1.txt doc/hgrc.5.txt
+%doc CONTRIBUTORS README doc/hg.1.txt doc/hgmerge.1.txt doc/hgrc.5.txt
 
 
 %changelog
+* Thu Sep 22 2005 Jeremy Katz <katzj@redhat.com> 
+- add contributors to %%doc
+
 * Tue Sep 20 2005 Jeremy Katz <katzj@redhat.com> - 0.7
 - update to 0.7
 
