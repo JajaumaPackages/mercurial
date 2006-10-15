@@ -12,7 +12,7 @@ BuildRequires: python-devel asciidoc xmlto
 %description
 Mercurial is a fast, lightweight source control management system designed 
 for efficient handling of very large distributed projects.
-
+ 
 %prep
 %setup -q
 
