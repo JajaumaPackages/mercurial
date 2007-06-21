@@ -1,13 +1,14 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 0.9.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPL
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
 Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python-devel asciidoc xmlto
+Provides: hg
 
 %description
 Mercurial is a fast, lightweight source control management system designed 
