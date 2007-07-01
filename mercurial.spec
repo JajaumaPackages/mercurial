@@ -8,7 +8,7 @@ URL: http://www.selenic.com/mercurial/
 Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python-devel asciidoc xmlto
-Provides: hg
+Provides: hg = %{version}-%{release}
 
 %description
 Mercurial is a fast, lightweight source control management system designed 
