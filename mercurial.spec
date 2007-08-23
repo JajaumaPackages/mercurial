@@ -1,7 +1,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
-Version: 0.9.3
-Release: 2%{?dist}
+Version: 0.9.4
+Release: 1%{?dist}
 License: GPL
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -45,6 +45,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Aug 23 2007 Neal Becker <ndbecker2@gmail.com> - 0.9.4-1
+- update to 0.9.4
+
 * Wed Jan  3 2007 Jeremy Katz <katzj@redhat.com> - 0.9.3-1
 - update to 0.9.3
 - remove asciidoc files now that we have them as manpages
