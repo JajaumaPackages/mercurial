@@ -1,0 +1,35 @@
+diff -ruN mercurial-0.9.4.orig/setup.py mercurial-0.9.4.new/setup.py
+--- mercurial-0.9.4.orig/setup.py	2007-06-25 22:18:18.000000000 -0400
++++ mercurial-0.9.4.new/setup.py	2007-08-29 19:17:36.000000000 -0400
+@@ -54,6 +54,21 @@
+ mercurial.version.remember_version(version)
+ cmdclass = {'install_data': install_package_data}
+ 
++# We want to install the contrib/ directory, but it isn't immediately
++# clear where to do that on some platforms. As a temporary expedient,
++# assemble that part of the setup manifest only if we are running on
++# a posix platform. This is no worse than the current state, and people
++# who understand the respective target platforms can improve it over
++# time.
++
++contrib_files = []  # default
++if os.name in ['posix']:
++    contrib_files = [(os.path.join('/usr/share/mercurial', root),
++                      [os.path.join(root, file_) for file_ in files])
++                     for root, dirs, files in os.walk('contrib')]
++    contrib_files = contrib_files + [('/usr/share/mercurial/contrib',
++                                      ['hgwebdir.cgi', 'hgweb.cgi'])]
++
+ setup(name='mercurial',
+       version=mercurial.version.get_version(),
+       author='Matt Mackall',
+@@ -67,7 +82,8 @@
+                    Extension('mercurial.base85', ['mercurial/base85.c'])],
+       data_files=[(os.path.join('mercurial', root),
+                    [os.path.join(root, file_) for file_ in files])
+-                  for root, dirs, files in os.walk('templates')],
++                  for root, dirs, files in os.walk('templates')] +
++                 contrib_files,
+       cmdclass=cmdclass,
+       scripts=['hg', 'hgmerge'],
+       options=dict(py2exe=dict(packages=['hgext']),
