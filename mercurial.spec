@@ -1,7 +1,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 0.9.4
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: GPL
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -52,9 +52,11 @@ rm -rf $RPM_BUILD_ROOT
 %doc CONTRIBUTORS README contrib/sample.hgrc
 %{_sysconfdir}/mercurial
 %{_mandir}/man*/*
-%{_datadir}/mercurial/contrib/*.py[co]
 
 %changelog
+* Thu Sep 20 2007 Neal Becker <ndbecker2@gmail.com> - 0.9.4-4
+- remove %{_datadir}/contrib stuff for now
+
 * Thu Sep 20 2007 Neal Becker <ndbecker2@gmail.com> - 0.9.4-3
 - Fix mercurial-install-contrib.patch (/usr/share/mercurial->/usr/share/mercurial/contrib)
 
