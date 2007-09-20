@@ -1,7 +1,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 0.9.4
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: GPL
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -50,10 +50,15 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.files
 %defattr(-,root,root,-)
 %doc CONTRIBUTORS README contrib/sample.hgrc
-%{_sysconfdir}/mercurial
+%{_sysconfdir}/mercurial/
+%dir %{_datadir}/mercurial/
+%ghost %{_datadir}/mercurial/contrib/*.py[co]
 %{_mandir}/man*/*
 
 %changelog
+* Thu Sep 20 2007 Neal Becker <ndbecker2@gmail.com> - 0.9.4-5
+- Use %ghost on contrib, otherwise EL-4 build fails
+
 * Thu Sep 20 2007 Neal Becker <ndbecker2@gmail.com> - 0.9.4-4
 - remove %{_datadir}/contrib stuff for now
 
