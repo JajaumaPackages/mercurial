@@ -1,12 +1,11 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 0.9.4
-Release: 7%{?dist}
+Release: 8%{?dist}
 License: GPL
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
 Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
-Patch0: mercurial-install-contrib.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python-devel asciidoc xmlto
 Provides: hg = %{version}-%{release}
@@ -17,7 +16,6 @@ for efficient handling of very large distributed projects.
  
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 python ./setup.py build
@@ -27,7 +25,7 @@ pushd doc ; make man ; popd
 
 %install
 rm -rf $RPM_BUILD_ROOT
-python ./setup.py install -O2 --root=$RPM_BUILD_ROOT --record=%{name}.files
+python ./setup.py install -O1 --root=$RPM_BUILD_ROOT --record=%{name}.files
 
 # and we have to install the man pages
 mkdir -p $RPM_BUILD_ROOT/%{_mandir}/man1 $RPM_BUILD_ROOT/%{_mandir}/man5
@@ -35,6 +33,11 @@ install -m 0644 doc/hg.1 $RPM_BUILD_ROOT/%{_mandir}/man1/hg.1
 install -m 0644 doc/hgmerge.1 $RPM_BUILD_ROOT/%{_mandir}/man1/hgmerge.1
 install -m 0644 doc/hgrc.5 $RPM_BUILD_ROOT/%{_mandir}/man5/hgrc.5
 install -m 0644 doc/hgignore.5 $RPM_BUILD_ROOT/%{_mandir}/man5/hgignore.5
+
+# install contrib
+which cp
+mkdir -p $RPM_BUILD_ROOT/%{_datadir}/mercurial/
+%{__cp} -av contrib $RPM_BUILD_ROOT/%{_datadir}/mercurial/
 
 # Set up a system-wide hgrc that says where the hgk script went:
 mkdir -p $RPM_BUILD_ROOT/etc/mercurial
@@ -51,10 +54,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %doc CONTRIBUTORS README contrib/sample.hgrc
 %{_sysconfdir}/mercurial/
-%{_datadir}/mercurial/contrib/*.py[co]
+%{_datadir}/mercurial/contrib/
 %{_mandir}/man*/*
 
 %changelog
+* Sat Sep 22 2007 Neal Becker <ndbecker2@gmail.com> - 0.9.4-8
+- Just cp contrib tree.
+- Revert install -O2
+
 * Thu Sep 20 2007 Neal Becker <ndbecker2@gmail.com> - 0.9.4-7
 - Change setup.py install to -O2 to get bytecompile on EL-4
 
