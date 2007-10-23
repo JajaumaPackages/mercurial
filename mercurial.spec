@@ -1,63 +1,72 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
-Version: 0.9.4
-Release: 8%{?dist}
-License: GPL
+Version: 0.9.5
+Release: 1%{?dist}
+License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
-Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
+Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python-devel asciidoc xmlto
+Requires: python
 Provides: hg = %{version}-%{release}
 
 %description
-Mercurial is a fast, lightweight source control management system designed 
+Mercurial is a fast, lightweight source control management system designed
 for efficient handling of very large distributed projects.
- 
+
 %prep
+rm -rf $RPM_BUILD_ROOT
 %setup -q
 
 %build
-python ./setup.py build
-
-# not built by default.  kind of lame
-pushd doc ; make man ; popd
+make all
 
 %install
-rm -rf $RPM_BUILD_ROOT
-python ./setup.py install -O1 --root=$RPM_BUILD_ROOT --record=%{name}.files
+python setup.py install -O1 --root $RPM_BUILD_ROOT --prefix %{_prefix} --record=%{name}.files
+make install-doc DESTDIR=$RPM_BUILD_ROOT MANDIR=%{_mandir}
 
-# and we have to install the man pages
-mkdir -p $RPM_BUILD_ROOT/%{_mandir}/man1 $RPM_BUILD_ROOT/%{_mandir}/man5
-install -m 0644 doc/hg.1 $RPM_BUILD_ROOT/%{_mandir}/man1/hg.1
-install -m 0644 doc/hgmerge.1 $RPM_BUILD_ROOT/%{_mandir}/man1/hgmerge.1
-install -m 0644 doc/hgrc.5 $RPM_BUILD_ROOT/%{_mandir}/man5/hgrc.5
-install -m 0644 doc/hgignore.5 $RPM_BUILD_ROOT/%{_mandir}/man5/hgignore.5
+install contrib/hgk          $RPM_BUILD_ROOT%{_bindir}
+install contrib/convert-repo $RPM_BUILD_ROOT%{_bindir}/mercurial-convert-repo
+install contrib/hg-ssh       $RPM_BUILD_ROOT%{_bindir}
+install contrib/git-viz/{hg-viz,git-rev-tree} $RPM_BUILD_ROOT%{_bindir}
 
-# install contrib
-which cp
-mkdir -p $RPM_BUILD_ROOT/%{_datadir}/mercurial/
-%{__cp} -av contrib $RPM_BUILD_ROOT/%{_datadir}/mercurial/
+bash_completion_dir=$RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d
+mkdir -p $bash_completion_dir
+install -m 644 contrib/bash_completion $bash_completion_dir/mercurial.sh
 
-# Set up a system-wide hgrc that says where the hgk script went:
-mkdir -p $RPM_BUILD_ROOT/etc/mercurial
-cat - >$RPM_BUILD_ROOT/etc/mercurial/hgrc << EOF
-[hgk]
-path=/usr/share/mercurial/contrib/hgk
-EOF
+zsh_completion_dir=$RPM_BUILD_ROOT%{_datadir}/zsh/site-functions
+mkdir -p $zsh_completion_dir
+install -m 644 contrib/zsh_completion $zsh_completion_dir/_mercurial
+
+lisp_dir=$RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp
+mkdir -p $lisp_dir
+install -m 644 contrib/mercurial.el $lisp_dir
+xlisp_dir=$RPM_BUILD_ROOT%{_datadir}/xemacs/site-packages/lisp
+mkdir -p $xlisp_dir
+install -m 644 contrib/mercurial.el $xlisp_dir
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-
 %files -f %{name}.files
 %defattr(-,root,root,-)
-%doc CONTRIBUTORS README contrib/sample.hgrc
-%{_sysconfdir}/mercurial/
-%{_datadir}/mercurial/contrib/
-%{_mandir}/man*/*
+%doc CONTRIBUTORS COPYING doc/README doc/hg*.txt doc/hg*.html doc/ja *.cgi
+%doc %attr(644,root,root) %{_mandir}/man?/hg*.gz
+%{_sysconfdir}/bash_completion.d/mercurial.sh
+%{_datadir}/zsh/site-functions/_mercurial
+%{_datadir}/emacs/site-lisp/mercurial.el
+%{_datadir}/xemacs/site-packages/lisp/mercurial.el
+%{_bindir}/hgk
+%{_bindir}/hg-ssh
+%{_bindir}/hg-viz
+%{_bindir}/git-rev-tree
+%{_bindir}/mercurial-convert-repo
 
 %changelog
+* Mon Oct 15 2007 Neal Becker <ndbecker2@gmail.com> - 0.9.5-1
+- Sync with spec file from mercurial
+
 * Sat Sep 22 2007 Neal Becker <ndbecker2@gmail.com> - 0.9.4-8
 - Just cp contrib tree.
 - Revert install -O2
