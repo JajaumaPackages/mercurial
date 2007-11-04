@@ -1,7 +1,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 0.9.5
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -64,6 +64,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/mercurial-convert-repo
 
 %changelog
+* Tue Oct 23 2007  <ndbecker2@gmail.com> - 0.9.5-2
+- Bump tag to fix confusion
+
 * Mon Oct 15 2007 Neal Becker <ndbecker2@gmail.com> - 0.9.5-1
 - Sync with spec file from mercurial
 
