@@ -1,7 +1,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 0.9.5
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -45,6 +45,7 @@ install -m 644 contrib/mercurial.el $lisp_dir
 xlisp_dir=$RPM_BUILD_ROOT%{_datadir}/xemacs/site-packages/lisp
 mkdir -p $xlisp_dir
 install -m 644 contrib/mercurial.el $xlisp_dir
+mkdir -p %{_sysconfdir}/mercurial/hgrc.d
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -62,8 +63,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/hg-viz
 %{_bindir}/git-rev-tree
 %{_bindir}/mercurial-convert-repo
+%dir %{_sysconfdir}/mercurial
 
 %changelog
+* Fri Nov  9 2007 Neal Becker <ndbecker2@gmail.com> - 0.9.5-2
+- mkdir /etc/mercurial/hgrc.d for plugins
+
 * Tue Oct 23 2007  <ndbecker2@gmail.com> - 0.9.5-2
 - Bump tag to fix confusion
 
