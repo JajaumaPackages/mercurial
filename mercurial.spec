@@ -1,7 +1,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 0.9.5
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -64,8 +64,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/git-rev-tree
 %{_bindir}/mercurial-convert-repo
 %dir %{_sysconfdir}/mercurial
+%dir %{_sysconfdir}/mercurial/hgrc.d
 
 %changelog
+* Fri Nov  9 2007 Neal Becker <ndbecker2@gmail.com> - 0.9.5-5
+- /etc/mercurial/hgrc.d missing
+
 * Fri Nov  9 2007 Neal Becker <ndbecker2@gmail.com> - 0.9.5-3
 - Fix to last change
 
