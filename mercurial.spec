@@ -1,7 +1,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 0.9.5
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -16,13 +16,13 @@ Mercurial is a fast, lightweight source control management system designed
 for efficient handling of very large distributed projects.
 
 %prep
-rm -rf $RPM_BUILD_ROOT
 %setup -q
 
 %build
 make all
 
 %install
+rm -rf $RPM_BUILD_ROOT
 python setup.py install -O1 --root $RPM_BUILD_ROOT --prefix %{_prefix} --record=%{name}.files
 make install-doc DESTDIR=$RPM_BUILD_ROOT MANDIR=%{_mandir}
 
@@ -67,6 +67,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/mercurial/hgrc.d
 
 %changelog
+* Fri Nov  9 2007 Neal Becker <ndbecker2@gmail.com> - 0.9.5-6
+- rpmlint fixes
+
 * Fri Nov  9 2007 Neal Becker <ndbecker2@gmail.com> - 0.9.5-5
 - /etc/mercurial/hgrc.d missing
 
@@ -93,10 +96,10 @@ rm -rf $RPM_BUILD_ROOT
 - Revert last change.
 
 * Thu Sep 20 2007 Neal Becker <ndbecker2@gmail.com> - 0.9.4-5
-- Use %ghost on contrib, otherwise EL-4 build fails
+- Use {ghost} on contrib, otherwise EL-4 build fails
 
 * Thu Sep 20 2007 Neal Becker <ndbecker2@gmail.com> - 0.9.4-4
-- remove %{_datadir}/contrib stuff for now
+- remove {_datadir}/contrib stuff for now
 
 * Thu Sep 20 2007 Neal Becker <ndbecker2@gmail.com> - 0.9.4-3
 - Fix mercurial-install-contrib.patch (/usr/share/mercurial->/usr/share/mercurial/contrib)
