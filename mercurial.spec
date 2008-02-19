@@ -1,7 +1,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 0.9.5
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -67,6 +67,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/mercurial/hgrc.d
 
 %changelog
+* Tue Feb 19 2008 Fedora Release Engineering <rel-eng@fedoraproject.org> - 0.9.5-7
+- Autorebuild for GCC 4.3
+
 * Fri Nov  9 2007 Neal Becker <ndbecker2@gmail.com> - 0.9.5-6
 - rpmlint fixes
 
