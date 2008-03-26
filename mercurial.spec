@@ -1,12 +1,12 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 1.0
-Release: 2%{?dist}
+Release: 4%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
 Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
-Source1: mercurial-site-start
+Source1: mercurial-site-start.el
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python-devel asciidoc xmlto
 Requires: python
@@ -15,6 +15,10 @@ Provides: hg = %{version}-%{release}
 %description
 Mercurial is a fast, lightweight source control management system designed
 for efficient handling of very large distributed projects.
+
+Quick start: http://www.selenic.com/mercurial/wiki/index.cgi/QuickStart
+Tutorial: http://www.selenic.com/mercurial/wiki/index.cgi/Tutorial
+Extensions: http://www.selenic.com/mercurial/wiki/index.cgi/CategoryExtension
 
 %package emacs
 Summary:	Mercurial version control system support for Emacs
@@ -30,7 +34,13 @@ Group:		Development/Tools
 Requires:	hg = %{version}-%{release}, tk
 
 %description hgk
-%{summary}.
+A Mercurial extension for displaying the change history graphically
+using Tcl/Tk.  Displays branches and merges in an easily
+understandable way and shows diffs for each revision.  Based on
+gitk for the git SCM.
+
+See http://www.selenic.com/mercurial/wiki/index.cgi/UsingHgk for more
+documentation.
 
 %prep
 %setup -q
@@ -72,8 +82,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.files
 %defattr(-,root,root,-)
-%doc CONTRIBUTORS COPYING doc/README doc/hg*.txt doc/hg*.html doc/ja *.cgi
+%doc CONTRIBUTORS COPYING doc/README doc/hg*.txt doc/hg*.html doc/ja *.cgi contrib/*.fcgi
 %doc %attr(644,root,root) %{_mandir}/man?/hg*.gz
+%doc %attr(644,root,root) contrib/*.svg contrib/*.hgrc
 %{_sysconfdir}/bash_completion.d/mercurial.sh
 %{_datadir}/zsh/site-functions/_mercurial
 %{_bindir}/hg-ssh
@@ -96,6 +107,12 @@ rm -rf $RPM_BUILD_ROOT
 #cd tests && python run-tests.py
 
 %changelog
+* Wed Mar 26 2008 Neal Becker <ndbecker2@gmail.com> - 1.0-4
+- Rename mercurial-site-start -> mercurial-site-start.el
+
+* Wed Mar 26 2008 Neal Becker <ndbecker2@gmail.com> - 1.0-3
+- Incorprate suggestions from hopper@omnifarious.org
+
 * Wed Mar 26 2008 Neal Becker <ndbecker2@gmail.com> - 1.0-2
 - Add site-start
 
