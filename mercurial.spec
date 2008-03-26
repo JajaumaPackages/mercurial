@@ -1,11 +1,12 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 1.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
 Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
+Source1: mercurial-site-start
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python-devel asciidoc xmlto
 Requires: python
@@ -63,6 +64,9 @@ mkdir -p $xlisp_dir
 install -m 644 contrib/mercurial.el $xlisp_dir
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
 
+mkdir -p $lisp_dir/site-start.d/ && install -m644 %SOURCE1 $lisp_dir/site-start.d/
+mkdir -p $xlisp_dir/site-start.d/ && install -m644 %SOURCE1 $xlisp_dir/site-start.d/
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -82,6 +86,8 @@ rm -rf $RPM_BUILD_ROOT
 %files emacs
 %{_datadir}/emacs/site-lisp/mercurial.el
 %{_datadir}/xemacs/site-packages/lisp/mercurial.el
+%{_datadir}/emacs/site-lisp/site-start.d/*
+%{_datadir}/xemacs/site-packages/lisp/site-start.d/*
 
 %files hgk
 %{_bindir}/hgk
@@ -90,6 +96,9 @@ rm -rf $RPM_BUILD_ROOT
 #cd tests && python run-tests.py
 
 %changelog
+* Wed Mar 26 2008 Neal Becker <ndbecker2@gmail.com> - 1.0-2
+- Add site-start
+
 * Tue Mar 25 2008 Neal Becker <ndbecker2@gmail.com> - 1.0-1
 - Update to 1.0
 - Disable check for now - 1 test fails
