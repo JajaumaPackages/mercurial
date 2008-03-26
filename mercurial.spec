@@ -1,11 +1,11 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
-Version: 0.9.5
-Release: 7%{?dist}
+Version: 1.0
+Release: 1%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
-Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.bz2
+Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python-devel asciidoc xmlto
 Requires: python
@@ -14,6 +14,22 @@ Provides: hg = %{version}-%{release}
 %description
 Mercurial is a fast, lightweight source control management system designed
 for efficient handling of very large distributed projects.
+
+%package emacs
+Summary:	Mercurial version control system support for Emacs
+Group:		Applications/Editors
+Requires:	hg = %{version}-%{release}, emacs-common
+
+%description emacs
+%{summary}.
+
+%package hgk
+Summary:	Hgk interface for mercurial
+Group:		Development/Tools
+Requires:	hg = %{version}-%{release}, tk
+
+%description hgk
+%{summary}.
 
 %prep
 %setup -q
@@ -56,9 +72,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc %attr(644,root,root) %{_mandir}/man?/hg*.gz
 %{_sysconfdir}/bash_completion.d/mercurial.sh
 %{_datadir}/zsh/site-functions/_mercurial
-%{_datadir}/emacs/site-lisp/mercurial.el
-%{_datadir}/xemacs/site-packages/lisp/mercurial.el
-%{_bindir}/hgk
 %{_bindir}/hg-ssh
 %{_bindir}/hg-viz
 %{_bindir}/git-rev-tree
@@ -66,7 +79,23 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/mercurial
 %dir %{_sysconfdir}/mercurial/hgrc.d
 
+%files emacs
+%{_datadir}/emacs/site-lisp/mercurial.el
+%{_datadir}/xemacs/site-packages/lisp/mercurial.el
+
+%files hgk
+%{_bindir}/hgk
+
+#%check
+#cd tests && python run-tests.py
+
 %changelog
+* Tue Mar 25 2008 Neal Becker <ndbecker2@gmail.com> - 1.0-1
+- Update to 1.0
+- Disable check for now - 1 test fails
+- Move emacs to separate package
+- Add check
+
 * Tue Feb 19 2008 Fedora Release Engineering <rel-eng@fedoraproject.org> - 0.9.5-7
 - Autorebuild for GCC 4.3
 
