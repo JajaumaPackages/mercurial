@@ -1,7 +1,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 1.0
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -9,6 +9,8 @@ Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
 Source1: mercurial-site-start.el
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python-devel asciidoc xmlto
+BuildRequires: emacs emacs-el 
+BuildRequires: xemacs xemacs-devel
 Requires: python
 Provides: hg = %{version}-%{release}
 
@@ -52,7 +54,7 @@ Summary:	Mercurial version control system support for Emacs
 Group:		Applications/Editors
 Requires:	hg = %{version}-%{release}, emacs-common
 Requires:       emacs(bin) >= %{emacs_version}
-
+Obsoletes:	%{pkg}-emacs
 
 %description -n emacs-%{pkg}
 Contains byte compiled elisp packages for %{pkg}.
@@ -61,7 +63,7 @@ help with C-c h h
 
 %package -n emacs-%{pkg}-el
 Summary:        Elisp source files for %{pkg} under GNU Emacs
-Group:          Development/Tools
+Group:          Applications/Editors
 Requires:       emacs-%{pkg} = %{version}-%{release}
 
 %description -n emacs-%{pkg}-el
@@ -71,7 +73,8 @@ package to use %{pkg} with GNU Emacs.
 
 %package -n xemacs-%{pkg}
 Summary:        Compiled elisp files to run %{pkg} under XEmacs
-Group:          Development/Tools
+Group:          Applications/Editors
+Requires:	hg = %{version}-%{release}, xemacs-common
 Requires:       xemacs(bin) >= %{xemacs_version}
 
 %description -n xemacs-%{pkg}
@@ -83,7 +86,7 @@ help with C-c h h
 
 %package -n xemacs-%{pkg}-el
 Summary:        Elisp source files for %{pkg} under XEmacs
-Group:          Development/Tools
+Group:          Applications/Editors
 Requires:       xemacs-%{pkg} = %{version}-%{release}
 
 %description -n xemacs-%{pkg}-el
@@ -203,6 +206,9 @@ rm -rf $RPM_BUILD_ROOT
 #cd tests && python run-tests.py
 
 %changelog
+* Tue Apr  8 2008 Neal Becker <ndbecker2@gmail.com> - 1.0-7
+- Various fixes
+
 * Tue Apr  8 2008 Neal Becker <ndbecker2@gmail.com> - 1.0-6
 - fix to comply with emacs packaging guidelines
 
