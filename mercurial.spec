@@ -1,7 +1,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 1.0
-Release: 7%{?dist}
+Release: 8%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -10,7 +10,7 @@ Source1: mercurial-site-start.el
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python-devel asciidoc xmlto
 BuildRequires: emacs emacs-el 
-BuildRequires: xemacs xemacs-devel
+BuildRequires: xemacs xemacs-devel xemacs-packages-extra
 Requires: python
 Provides: hg = %{version}-%{release}
 
@@ -206,6 +206,9 @@ rm -rf $RPM_BUILD_ROOT
 #cd tests && python run-tests.py
 
 %changelog
+* Tue Apr  8 2008 Neal Becker <ndbecker2@gmail.com> - 1.0-8
+- BR xemacs-packages-extra
+
 * Tue Apr  8 2008 Neal Becker <ndbecker2@gmail.com> - 1.0-7
 - Various fixes
 
