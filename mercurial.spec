@@ -1,7 +1,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 1.0
-Release: 9%{?dist}
+Release: 10%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -106,7 +106,8 @@ using Tcl/Tk.  Displays branches and merges in an easily
 understandable way and shows diffs for each revision.  Based on
 gitk for the git SCM.
 
-See http://www.selenic.com/mercurial/wiki/index.cgi/UsingHgk for more
+Adds the "hg view" command.  See 
+http://www.selenic.com/mercurial/wiki/index.cgi/UsingHgk for more
 documentation.
 
 %prep
@@ -123,7 +124,7 @@ make install-doc DESTDIR=$RPM_BUILD_ROOT MANDIR=%{_mandir}
 grep -v 'hgk.py*' < %{name}.files > %{name}-base.files
 grep 'hgk.py*' < %{name}.files > %{name}-hgk.files
 
-install contrib/hgk          $RPM_BUILD_ROOT%{_bindir}
+install -D contrib/hgk       $RPM_BUILD_ROOT%{_libexecdir}/mercurial/hgk
 install contrib/convert-repo $RPM_BUILD_ROOT%{_bindir}/mercurial-convert-repo
 install contrib/hg-ssh       $RPM_BUILD_ROOT%{_bindir}
 install contrib/git-viz/{hg-viz,git-rev-tree} $RPM_BUILD_ROOT%{_bindir}
@@ -160,6 +161,9 @@ cat >hgk.rc <<EOF
 [extensions]
 # enable hgk extension ('hg help' shows 'view' as a command)
 hgk=
+
+[hgk]
+path=%{_libexecdir}/mercurial/hgk
 EOF
 install hgk.rc $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
 
@@ -199,13 +203,16 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %files hgk -f %{name}-hgk.files
-%{_bindir}/hgk
+%{_libexecdir}/mercurial/
 %{_sysconfdir}/mercurial/hgrc.d/hgk.rc
 
 #%check
 #cd tests && python run-tests.py
 
 %changelog
+* Wed Apr  9 2008 Neal Becker <ndbecker2@gmail.com> - 1.0-10
+- Patch to hgk from Mads Kiilerich <mads@kiilerich.com>
+
 * Tue Apr  8 2008 Neal Becker <ndbecker2@gmail.com> - 1.0-9
 - Add '-l mercurial.el' for emacs also
 
