@@ -1,7 +1,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 1.0
-Release: 10%{?dist}
+Release: 11%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -142,10 +142,10 @@ mkdir -p $RPM_BUILD_ROOT%{xemacs_lispdir}
 pushd contrib
 for file in mercurial.el mq.el; do
   emacs -batch -l mercurial.el --no-site-file -f batch-byte-compile $file
-  install -m 644 $file ${file}c $RPM_BUILD_ROOT%{emacs_lispdir}
+  install -p -m 644 $file ${file}c $RPM_BUILD_ROOT%{emacs_lispdir}
   rm ${file}c
   xemacs -batch -l mercurial.el --no-site-file -f batch-byte-compile $file
-  install -m 644 $file ${file}c $RPM_BUILD_ROOT%{xemacs_lispdir}
+  install -p -m 644 $file ${file}c $RPM_BUILD_ROOT%{xemacs_lispdir}
   rm ${file}c
 done
 popd
@@ -210,6 +210,10 @@ rm -rf $RPM_BUILD_ROOT
 #cd tests && python run-tests.py
 
 %changelog
+* Thu Apr 10 2008 Neal Becker <ndbecker2@gmail.com> - 1.0-11
+- Use install -p to install .el{c} files
+- Don't (load mercurial) by default.
+
 * Wed Apr  9 2008 Neal Becker <ndbecker2@gmail.com> - 1.0-10
 - Patch to hgk from Mads Kiilerich <mads@kiilerich.com>
 
