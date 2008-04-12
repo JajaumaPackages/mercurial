@@ -1,7 +1,9 @@
+%{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
+
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 1.0
-Release: 11%{?dist}
+Release: 12%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -10,7 +12,6 @@ Source1: mercurial-site-start.el
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python-devel asciidoc xmlto
 BuildRequires: emacs emacs-el 
-BuildRequires: xemacs xemacs-devel xemacs-packages-extra
 Requires: python
 Provides: hg = %{version}-%{release}
 
@@ -37,18 +38,6 @@ Extensions: http://www.selenic.com/mercurial/wiki/index.cgi/CategoryExtension
 %define emacs_startdir %(pkg-config emacs --variable sitestartdir)
 %endif
 
-# If the xemacs-devel package has installed a pkgconfig file, use that to determine
-# install locations and Emacs version at build time, otherwise set defaults.
-%if %($(pkg-config xemacs) ; echo $?)
-%define xemacs_version 21.5
-%define xemacs_lispdir %{_datadir}/xemacs/site-packages
-%define xemacs_startdir %{_datadir}/xemacs/site-packages/site-start.d
-%else
-%define xemacs_version %(pkg-config xemacs --modversion)
-%define xemacs_lispdir %(pkg-config xemacs --variable sitepkglispdir)
-%define xemacs_startdir %(pkg-config xemacs --variable sitestartdir)
-%endif
-
 %package -n emacs-%{pkg}
 Summary:	Mercurial version control system support for Emacs
 Group:		Applications/Editors
@@ -70,29 +59,6 @@ Requires:       emacs-%{pkg} = %{version}-%{release}
 This package contains the elisp source files for %{pkg} under GNU Emacs. You
 do not need to install this package to run %{pkg}. Install the emacs-%{pkg}
 package to use %{pkg} with GNU Emacs.
-
-%package -n xemacs-%{pkg}
-Summary:        Compiled elisp files to run %{pkg} under XEmacs
-Group:          Applications/Editors
-Requires:	hg = %{version}-%{release}, xemacs-common
-Requires:       xemacs(bin) >= %{xemacs_version}
-
-%description -n xemacs-%{pkg}
-This package contains the byte compiled elisp packages to use %{pkg} with
-XEmacs. 
-To get started: start xemacs, load hg-mode with M-x hg-mode, and show 
-help with C-c h h
-
-
-%package -n xemacs-%{pkg}-el
-Summary:        Elisp source files for %{pkg} under XEmacs
-Group:          Applications/Editors
-Requires:       xemacs-%{pkg} = %{version}-%{release}
-
-%description -n xemacs-%{pkg}-el
-This package contains the elisp source files for %{pkg} under XEmacs. You do
-not need to install this package to run %{pkg}. Install the xemacs-%{pkg}
-package to use %{pkg} with XEmacs.
 
 %package hgk
 Summary:	Hgk interface for mercurial
@@ -138,14 +104,11 @@ mkdir -p $zsh_completion_dir
 install -m 644 contrib/zsh_completion $zsh_completion_dir/_mercurial
 
 mkdir -p $RPM_BUILD_ROOT%{emacs_lispdir}
-mkdir -p $RPM_BUILD_ROOT%{xemacs_lispdir}
+
 pushd contrib
 for file in mercurial.el mq.el; do
   emacs -batch -l mercurial.el --no-site-file -f batch-byte-compile $file
   install -p -m 644 $file ${file}c $RPM_BUILD_ROOT%{emacs_lispdir}
-  rm ${file}c
-  xemacs -batch -l mercurial.el --no-site-file -f batch-byte-compile $file
-  install -p -m 644 $file ${file}c $RPM_BUILD_ROOT%{xemacs_lispdir}
   rm ${file}c
 done
 popd
@@ -155,7 +118,6 @@ popd
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
 
 mkdir -p $RPM_BUILD_ROOT%{emacs_startdir} && install -m644 %SOURCE1 $RPM_BUILD_ROOT%{emacs_startdir}
-mkdir -p $RPM_BUILD_ROOT%{xemacs_startdir} && install -m644 %SOURCE1 $RPM_BUILD_ROOT%{xemacs_startdir}
 
 cat >hgk.rc <<EOF
 [extensions]
@@ -186,6 +148,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/mercurial
 %dir %{_sysconfdir}/mercurial/hgrc.d
 %{_sysconfdir}/mercurial/hgrc.d/mergetools.hgrc
+%dir %{python_sitearch}/mercurial
+%dir %{python_sitearch}/hgext
 
 %files -n emacs-%{pkg}
 %{emacs_lispdir}/*.elc
@@ -193,14 +157,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n emacs-%{pkg}-el
 %{emacs_lispdir}/*.el
-
-%files -n xemacs-%{pkg}
-%{xemacs_lispdir}/*.elc
-%{xemacs_startdir}/*.el
-
-%files -n xemacs-%{pkg}-el
-%{xemacs_lispdir}/*.el
-
 
 %files hgk -f %{name}-hgk.files
 %{_libexecdir}/mercurial/
@@ -210,6 +166,10 @@ rm -rf $RPM_BUILD_ROOT
 #cd tests && python run-tests.py
 
 %changelog
+* Sat Apr 12 2008 Neal Becker <ndbecker2@gmail.com> - 1.0-12
+- Remove xemacs pkg - this is moved to xemacs-extras
+- Own %{python_sitearch}/{mercurial,hgext} dirs
+
 * Thu Apr 10 2008 Neal Becker <ndbecker2@gmail.com> - 1.0-11
 - Use install -p to install .el{c} files
 - Don't (load mercurial) by default.
