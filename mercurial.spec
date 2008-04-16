@@ -9,6 +9,7 @@ Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
 Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
 Source1: mercurial-site-start.el
+Patch0: mercurial-mergetools.hgrc.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python-devel asciidoc xmlto
 BuildRequires: emacs emacs-el 
@@ -78,6 +79,7 @@ documentation.
 
 %prep
 %setup -q
+%patch0 -p0
 
 %build
 make all
