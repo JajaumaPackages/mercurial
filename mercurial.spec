@@ -3,7 +3,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 1.0
-Release: 13%{?dist}
+Release: 14%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -149,7 +149,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/mercurial-convert-repo
 %dir %{_sysconfdir}/mercurial
 %dir %{_sysconfdir}/mercurial/hgrc.d
-%{_sysconfdir}/mercurial/hgrc.d/mergetools.hgrc
+%{_sysconfdir}/mercurial/hgrc.d/mergetools.rc
 %dir %{python_sitearch}/mercurial
 %dir %{python_sitearch}/hgext
 
@@ -168,6 +168,9 @@ rm -rf $RPM_BUILD_ROOT
 #cd tests && python run-tests.py
 
 %changelog
+* Thu Apr 17 2008 Neal Becker <ndbecker2@gmail.com> - 1.0-14
+- Oops, fix %%files due to last change
+
 * Wed Apr 16 2008 Neal Becker <ndbecker2@gmail.com> - 1.0-13
 - install mergetools.hgrc as mergetools.rc
 
