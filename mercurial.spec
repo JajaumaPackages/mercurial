@@ -3,14 +3,14 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 1.0.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
 Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
 Source1: mercurial-site-start.el
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildRequires: python-devel asciidoc xmlto
+BuildRequires: python python-devel asciidoc xmlto
 BuildRequires: emacs emacs-el pkgconfig
 Requires: python
 Provides: hg = %{version}-%{release}
@@ -162,10 +162,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_libexecdir}/mercurial/
 %{_sysconfdir}/mercurial/hgrc.d/hgk.rc
 
-#%check
+#%%check
 #cd tests && python run-tests.py
 
 %changelog
+* Sun Jun 15 2008 Neal Becker <ndbecker2@gmail.com> - 1.0.1-4
+- Bitten by expansion of commented out macro (again)
+
 * Sun Jun 15 2008 Neal Becker <ndbecker2@gmail.com> - 1.0.1-3
 - Add BR pkgconfig
 
