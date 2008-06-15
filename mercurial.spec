@@ -3,7 +3,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 1.0.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -33,9 +33,9 @@ Extensions: http://www.selenic.com/mercurial/wiki/index.cgi/CategoryExtension
 %define emacs_lispdir %{_datadir}/emacs/site-lisp
 %define emacs_startdir %{_datadir}/emacs/site-lisp/site-start.d
 %else
-%define emacs_version %(pkg-config emacs --modversion)
-%define emacs_lispdir %(pkg-config emacs --variable sitepkglispdir)
-%define emacs_startdir %(pkg-config emacs --variable sitestartdir)
+%define emacs_version %{expand:%(pkg-config emacs --modversion)}
+%define emacs_lispdir %{expand:%(pkg-config emacs --variable sitepkglispdir)}
+%define emacs_startdir %{expand:%(pkg-config emacs --variable sitestartdir)}
 %endif
 
 %package -n emacs-%{pkg}
@@ -166,8 +166,9 @@ rm -rf $RPM_BUILD_ROOT
 #cd tests && python run-tests.py
 
 %changelog
-* Sun Jun 15 2008 Neal Becker <ndbecker2@gmail.com> - 1.0.1-1
+* Sun Jun 15 2008 Neal Becker <ndbecker2@gmail.com> - 1.0.1-2
 - Update to 1.0.1
+- Fix emacs_version, etc macros (need expand)
 - Remove patch0
 
 * Mon Jun  2 2008 Neal Becker <ndbecker2@gmail.com> - 1.0-15
