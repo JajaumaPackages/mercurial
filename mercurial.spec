@@ -3,14 +3,14 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 1.0.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
 Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
 Source1: mercurial-site-start.el
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildRequires: python python-devel asciidoc xmlto
+BuildRequires: python python-devel
 BuildRequires: emacs emacs-el pkgconfig
 Requires: python
 Provides: hg = %{version}-%{release}
@@ -84,7 +84,7 @@ make all
 
 %install
 rm -rf $RPM_BUILD_ROOT
-python setup.py install -O1 --root $RPM_BUILD_ROOT --prefix %{_prefix} --record=%{name}.files
+%{__python} setup.py install -O1 --root $RPM_BUILD_ROOT --prefix %{_prefix} --record=%{name}.files
 make install-doc DESTDIR=$RPM_BUILD_ROOT MANDIR=%{_mandir}
 
 grep -v 'hgk.py*' < %{name}.files > %{name}-base.files
@@ -163,9 +163,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/mercurial/hgrc.d/hgk.rc
 
 #%%check
-#cd tests && python run-tests.py
+#cd tests && %{__python} run-tests.py
 
 %changelog
+* Mon Dec  1 2008 Neal Becker <ndbecker2@gmail.com> - 1.0.2-3
+- Remove BR asciidoc
+- Use macro for python executable
+
 * Sat Nov 29 2008 Ignacio Vazquez-Abrams <ivazqueznet+rpm@gmail.com> - 1.0.2-2
 - Rebuild for Python 2.6
 
