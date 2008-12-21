@@ -168,6 +168,7 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Sun Dec 21 2008 Neal Becker <ndbecker2@gmail.com> - 1.1.1-1
 - Update to 1.1.1
+- Remove typo
 
 * Thu Dec 04 2008 Ignacio Vazquez-Abrams <ivazqueznet+rpm@gmail.com> - 1.1-2
 - Rebuild for Python 2.6
