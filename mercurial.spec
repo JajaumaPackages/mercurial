@@ -149,7 +149,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/mercurial-convert-repo
 %dir %{_sysconfdir}/mercurial
 %dir %{_sysconfdir}/mercurial/hgrc.d
-%{_sysconfdir}/mercurial/hgrc.d/mergetools.rc.sample
+%{_sysconfdir}/mercurial/hgrc.d/mergetools.rc
 %dir %{python_sitearch}/mercurial
 %dir %{python_sitearch}/hgext
 
@@ -169,7 +169,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %changelog
 * Sat Feb  7 2009 Neal Becker <ndbecker2@gmail.com> - 1.1.2-3
-- Patch mergetools.hgrc to fix filemerge bug
+- Patch mergetools.rc to fix filemerge bug
 
 * Thu Jan  1 2009 Neal Becker <ndbecker2@gmail.com> - 1.1.2-2
 - Rename mergetools.rc -> mergetools.rc.sample
