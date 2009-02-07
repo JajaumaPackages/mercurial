@@ -9,6 +9,8 @@ Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
 Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
 Source1: mercurial-site-start.el
+# temporary fix for filemerge bug
+Patch0: mercurial-mergetools.hgrc.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python python-devel
 BuildRequires: emacs emacs-el pkgconfig
@@ -24,7 +26,6 @@ Tutorial: http://www.selenic.com/mercurial/wiki/index.cgi/Tutorial
 Extensions: http://www.selenic.com/mercurial/wiki/index.cgi/CategoryExtension
 
 %define pkg mercurial
-#%define pkgname Foo
 
 # If the emacs-el package has installed a pkgconfig file, use that to determine
 # install locations and Emacs version at build time, otherwise set defaults.
@@ -78,6 +79,7 @@ documentation.
 
 %prep
 %setup -q
+%patch0 -p0
 
 %build
 make all
@@ -129,7 +131,7 @@ path=%{_libexecdir}/mercurial/hgk
 EOF
 install hgk.rc $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
 
-install contrib/mergetools.hgrc $RPM_BUILD_ROOT%{_sysconfdir}/mercurial/hgrc.d/mergetools.rc.sample
+install contrib/mergetools.hgrc $RPM_BUILD_ROOT%{_sysconfdir}/mercurial/hgrc.d/mergetools.rc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
