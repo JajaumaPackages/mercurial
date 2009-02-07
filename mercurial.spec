@@ -3,7 +3,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 1.1.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -79,7 +79,7 @@ documentation.
 
 %prep
 %setup -q
-%patch0 -p0
+%patch0 -p1
 
 %build
 make all
@@ -168,6 +168,9 @@ rm -rf $RPM_BUILD_ROOT
 #cd tests && %{__python} run-tests.py
 
 %changelog
+* Sat Feb  7 2009 Neal Becker <ndbecker2@gmail.com> - 1.1.2-3
+- Patch mergetools.hgrc to fix filemerge bug
+
 * Thu Jan  1 2009 Neal Becker <ndbecker2@gmail.com> - 1.1.2-2
 - Rename mergetools.rc -> mergetools.rc.sample
 
