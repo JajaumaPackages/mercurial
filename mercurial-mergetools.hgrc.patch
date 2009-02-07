@@ -1,16 +1,12 @@
---- contrib/mergetools.hgrc.orig	2008-03-24 19:05:20.000000000 -0400
-+++ contrib/mergetools.hgrc	2008-04-15 15:27:46.000000000 -0400
-@@ -1,11 +1,12 @@
- # Some default global settings for common merge tools
+--- mercurial-1.1.2/contrib/mergetools.hgrc.orig	2009-02-07 07:14:46.000000000 -0500
++++ mercurial-1.1.2/contrib/mergetools.hgrc	2009-02-07 07:14:15.000000000 -0500
+@@ -46,6 +46,6 @@
+ ecmerge.regkey=Software\Elli\xc3\xa9 Computing\Merge
+ ecmerge.gui=True
  
- [merge-tools]
--kdiff3.args=--auto -L1 base --L2 local --L3 other $base $local $other -o $output
-+kdiff3.args=--auto --L1 base --L2 local --L3 other $base $local $other -o $output
- kdiff3.regkey=Software\KDiff3
- kdiff3.regappend=\kdiff3.exe
- kdiff3.fixeol=True
- kdiff3.gui=True
-+kdiff3.priority=1
- 
- gvimdiff.args=--nofork -d -g -O $local $other $base
- gvimdiff.regkey=Software\Vim\GVim
+-filemerge.executable=/Developer/Applications/Utilities/FileMerge.app/Contents/MacOS/FileMerge
+-filemerge.args=-left $other -right $local -ancestor $base -merge $output
+-filemerge.gui=True
++#filemerge.executable=/Developer/Applications/Utilities/FileMerge.app/Contents/MacOS/FileMerge
++#filemerge.args=-left $other -right $local -ancestor $base -merge $output
++#filemerge.gui=True
