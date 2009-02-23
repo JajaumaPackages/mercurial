@@ -3,7 +3,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 1.1.2
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -147,8 +147,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/hg-viz
 %{_bindir}/git-rev-tree
 %{_bindir}/mercurial-convert-repo
-%dir {_sysconfdir}/bash_completion.d/
-%dir {_datadir}/zsh/site-functions/
+%dir %{_sysconfdir}/bash_completion.d/
+%dir %{_datadir}/zsh/site-functions/
 %dir %{_sysconfdir}/mercurial
 %dir %{_sysconfdir}/mercurial/hgrc.d
 %config %{_sysconfdir}/mercurial/hgrc.d/mergetools.rc
@@ -170,6 +170,9 @@ rm -rf $RPM_BUILD_ROOT
 #cd tests && %{__python} run-tests.py
 
 %changelog
+* Mon Feb 23 2009 Neal Becker <ndbecker2@gmail.com> - 1.1.2-6
+- Fix typo
+
 * Mon Feb 23 2009 Neal Becker <ndbecker2@gmail.com> - 1.1.2-5
 - Own directories bash_completion.d and zsh/site-functions
   https://bugzilla.redhat.com/show_bug.cgi?id=487015
