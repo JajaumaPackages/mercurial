@@ -3,14 +3,14 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 1.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
 Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
 Source1: mercurial-site-start.el
 # temporary fix for filemerge bug
-Patch0: mercurial-mergetools.hgrc.patch
+#Patch0: mercurial-mergetools.hgrc.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python python-devel
 BuildRequires: emacs emacs-el pkgconfig
@@ -79,7 +79,7 @@ documentation.
 
 %prep
 %setup -q
-%patch0 -p1
+#%patch0 -p1
 
 %build
 make all
@@ -170,6 +170,9 @@ rm -rf $RPM_BUILD_ROOT
 #cd tests && %{__python} run-tests.py
 
 %changelog
+* Wed Mar  4 2009 Neal Becker <ndbecker2@gmail.com> - 1.2-2
+- patch0 for filemerge bug should not be needed
+
 * Wed Mar  4 2009 Neal Becker <ndbecker2@gmail.com> - 1.2-1
 - Update to 1.2
 
