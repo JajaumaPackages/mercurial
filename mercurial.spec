@@ -3,7 +3,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 1.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv2
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -166,10 +166,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_libexecdir}/mercurial/
 %{_sysconfdir}/mercurial/hgrc.d/hgk.rc
 
-#%%check
-#cd tests && %{__python} run-tests.py
+%check
+cd tests && %{__python} run-tests.py
 
 %changelog
+* Wed Jul  1 2009 Neal Becker <ndbecker2@gmail.com> - 1.3-2
+- Re-enable tests since they now pass
+
 * Wed Jul  1 2009 Neal Becker <ndbecker2@gmail.com> - 1.3-1
 - Update to 1.3
 
