@@ -2,9 +2,9 @@
 
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
-Version: 1.4.3
+Version: 1.5
 Release: 1%{?dist}
-License: GPLv2
+License: GPLv2+
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
 Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
@@ -170,6 +170,12 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Sat Mar  6 2010 Neal Becker <ndbecker2@gmail.com> - 1.5-1
+- Update to 1.5
+
+* Fri Feb  5 2010 Neal Becker <ndbecker2@gmail.com> - 1.4.3-2
+- License changed to gplv2+
+
 * Mon Feb  1 2010 Neal Becker <ndbecker2@gmail.com> - 1.4.3-1
 - Update to 1.4.3
 
