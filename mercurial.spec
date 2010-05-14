@@ -2,7 +2,7 @@
 
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
-Version: 1.5.2
+Version: 1.5.3
 Release: 1%{?dist}
 License: GPLv2+
 Group: Development/Tools
@@ -170,6 +170,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Fri May 14 2010 Neal Becker <ndbecker2@gmail.com> - 1.5.3-1
+- Update to 1.5.3
+
 * Mon May  3 2010 Neal Becker <ndbecker2@gmail.com> - 1.5.2-1
 - update to 1.5.2
 
