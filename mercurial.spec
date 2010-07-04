@@ -3,7 +3,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 1.6
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv2+
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -94,7 +94,6 @@ grep 'hgk.py*' < %{name}.files > %{name}-hgk.files
 
 install -D contrib/hgk       $RPM_BUILD_ROOT%{_libexecdir}/mercurial/hgk
 install contrib/hg-ssh       $RPM_BUILD_ROOT%{_bindir}
-install contrib/git-viz/{hg-viz,git-rev-tree} $RPM_BUILD_ROOT%{_bindir}
 
 bash_completion_dir=$RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d
 mkdir -p $bash_completion_dir
@@ -170,6 +169,7 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Sun Jul  4 2010 Neal Becker <ndbecker2@gmail.com> - 1.6-1
 - Update to 1.6
+- git-viz is removed
 
 * Fri Jun 25 2010 Neal Becker <ndbecker2@gmail.com> - 1.5.4-1
 - Don't install mercurial-convert-repo (use hg convert instead)
