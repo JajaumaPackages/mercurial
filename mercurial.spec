@@ -3,7 +3,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 1.6
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPLv2+
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -142,8 +142,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/bash_completion.d/mercurial.sh
 %{_datadir}/zsh/site-functions/_mercurial
 %{_bindir}/hg-ssh
-%{_bindir}/hg-viz
-%{_bindir}/git-rev-tree
 %dir %{_sysconfdir}/bash_completion.d/
 %dir %{_datadir}/zsh/site-functions/
 %dir %{_sysconfdir}/mercurial
@@ -167,6 +165,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Sun Jul  4 2010 Neal Becker <ndbecker2@gmail.com> - 1.6-2
+- Remove hg-viz, git-rev-tree
+
 * Sun Jul  4 2010 Neal Becker <ndbecker2@gmail.com> - 1.6-1
 - Update to 1.6
 - git-viz is removed
