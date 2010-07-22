@@ -3,7 +3,7 @@
 Summary: A fast, lightweight distributed source control management system 
 Name: mercurial
 Version: 1.6
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: GPLv2+
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -165,6 +165,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Wed Jul 21 2010 David Malcolm <dmalcolm@redhat.com> - 1.6-4
+- Rebuilt for https://fedoraproject.org/wiki/Features/Python_2.7/MassRebuild
+
 * Sun Jul  4 2010 Neal Becker <ndbecker2@gmail.com> - 1.6-2
 - Remove hg-viz, git-rev-tree
 
