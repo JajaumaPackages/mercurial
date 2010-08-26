@@ -151,13 +151,16 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{python_sitearch}/hgext
 
 %files -n emacs-%{pkg}
+%defattr(-,root,root,-)
 %{emacs_lispdir}/*.elc
 %{emacs_startdir}/*.el
 
 %files -n emacs-%{pkg}-el
+%defattr(-,root,root,-)
 %{emacs_lispdir}/*.el
 
 %files hgk -f %{name}-hgk.files
+%defattr(-,root,root,-)
 %{_libexecdir}/mercurial/
 %{_sysconfdir}/mercurial/hgrc.d/hgk.rc
 
