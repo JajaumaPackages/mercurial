@@ -1,6 +1,6 @@
 %{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
-Summary: A fast, lightweight distributed source control management system 
+Summary: Mercurial -- a distributed SCM
 Name: mercurial
 Version: 1.6.3
 Release: 1%{?dist}
@@ -92,8 +92,8 @@ make install-doc DESTDIR=$RPM_BUILD_ROOT MANDIR=%{_mandir}
 grep -v 'hgk.py*' < %{name}.files > %{name}-base.files
 grep 'hgk.py*' < %{name}.files > %{name}-hgk.files
 
-install -D contrib/hgk       $RPM_BUILD_ROOT%{_libexecdir}/mercurial/hgk
-install contrib/hg-ssh       $RPM_BUILD_ROOT%{_bindir}
+install -D -m 755 contrib/hgk       $RPM_BUILD_ROOT%{_libexecdir}/mercurial/hgk
+install -m 755 contrib/hg-ssh       $RPM_BUILD_ROOT%{_bindir}
 
 bash_completion_dir=$RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d
 mkdir -p $bash_completion_dir
@@ -127,9 +127,9 @@ hgk=
 [hgk]
 path=%{_libexecdir}/mercurial/hgk
 EOF
-install hgk.rc $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
+install -m 644 hgk.rc $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
 
-install contrib/mergetools.hgrc $RPM_BUILD_ROOT%{_sysconfdir}/mercurial/hgrc.d/mergetools.rc
+install -m 644 contrib/mergetools.hgrc $RPM_BUILD_ROOT%{_sysconfdir}/mercurial/hgrc.d/mergetools.rc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -139,7 +139,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc CONTRIBUTORS COPYING doc/README doc/hg*.txt doc/hg*.html *.cgi contrib/*.fcgi
 %doc %attr(644,root,root) %{_mandir}/man?/hg*.gz
 %doc %attr(644,root,root) contrib/*.svg contrib/sample.hgrc
-%{_sysconfdir}/bash_completion.d/mercurial.sh
+%config(noreplace) %{_sysconfdir}/bash_completion.d/mercurial.sh
 %{_datadir}/zsh/site-functions/_mercurial
 %{_bindir}/hg-ssh
 %dir %{_sysconfdir}/bash_completion.d/
@@ -151,13 +151,16 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{python_sitearch}/hgext
 
 %files -n emacs-%{pkg}
+%defattr(-,root,root,-)
 %{emacs_lispdir}/*.elc
 %{emacs_startdir}/*.el
 
 %files -n emacs-%{pkg}-el
+%defattr(-,root,root,-)
 %{emacs_lispdir}/*.el
 
 %files hgk -f %{name}-hgk.files
+%defattr(-,root,root,-)
 %{_libexecdir}/mercurial/
 %{_sysconfdir}/mercurial/hgrc.d/hgk.rc
 
