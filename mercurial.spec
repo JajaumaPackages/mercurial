@@ -2,8 +2,8 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
-Version: 1.6.3
-Release: 2%{?dist}
+Version: 1.6.4
+Release: 1%{?dist}
 License: GPLv2+
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -166,6 +166,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Fri Oct  1 2010 Neal Becker <ndbecker2@gmail.com> - 1.6.4-1
+- Update to 1.6.4
+
 * Fri Aug 27 2010 Neal Becker <ndbecker2@gmail.com> - 1.6.3-1
 - Fix some rpmlint issues
 
