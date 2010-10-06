@@ -3,17 +3,16 @@
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
 Version: 1.6.4
-Release: 1%{?dist}
+Release: 3%{?dist}
 License: GPLv2+
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
 Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
 Source1: mercurial-site-start.el
-# temporary fix for filemerge bug
-#Patch0: mercurial-mergetools.hgrc.patch
+Patch0: mercurial-i18n.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python python-devel
-BuildRequires: emacs emacs-el pkgconfig
+BuildRequires: emacs emacs-el pkgconfig gettext
 Requires: python
 Provides: hg = %{version}-%{release}
 
@@ -77,7 +76,7 @@ documentation.
 
 %prep
 %setup -q
-#%patch0 -p1
+%patch0 -p0
 
 %build
 make all
@@ -129,10 +128,19 @@ install -m 644 hgk.rc $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
 
 install -m 644 contrib/mergetools.hgrc $RPM_BUILD_ROOT%{_sysconfdir}/mercurial/hgrc.d/mergetools.rc
 
+mv $RPM_BUILD_ROOT%{python_sitearch}/mercurial/locale $RPM_BUILD_ROOT%{_datadir}/locale
+rm -rf $RPM_BUILD_ROOT%{python_sitearch}/mercurial/locale
+
+
+%find_lang hg
+
+grep -v locale %{name}-base.files > %{name}-base-filtered.files
+cat %{name}-base-filtered.files hg.lang > %{name}-base+hg.lang.files
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f %{name}-base.files
+%files -f %{name}-base+hg.lang.files
 %defattr(-,root,root,-)
 %doc CONTRIBUTORS COPYING doc/README doc/hg*.txt doc/hg*.html *.cgi contrib/*.fcgi
 %doc %attr(644,root,root) %{_mandir}/man?/hg*.gz
@@ -166,6 +174,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Wed Oct  6 2010 Neal Becker <ndbecker2@gmail.com> - 1.6.4-3
+- patch i18n.py so hg will find moved locale files
+
 * Fri Oct  1 2010 Neal Becker <ndbecker2@gmail.com> - 1.6.4-1
 - Update to 1.6.4
 
