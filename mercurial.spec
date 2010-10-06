@@ -9,8 +9,7 @@ Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
 Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
 Source1: mercurial-site-start.el
-# temporary fix for filemerge bug
-#Patch0: mercurial-mergetools.hgrc.patch
+Patch0: mercurial-i18n.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python python-devel
 BuildRequires: emacs emacs-el pkgconfig gettext
@@ -77,7 +76,7 @@ documentation.
 
 %prep
 %setup -q
-#%patch0 -p1
+%patch0 -p0
 
 %build
 make all
@@ -130,6 +129,8 @@ install -m 644 hgk.rc $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
 install -m 644 contrib/mergetools.hgrc $RPM_BUILD_ROOT%{_sysconfdir}/mercurial/hgrc.d/mergetools.rc
 
 mv $RPM_BUILD_ROOT%{python_sitearch}/mercurial/locale $RPM_BUILD_ROOT%{_datadir}/locale
+rm -rf $RPM_BUILD_ROOT%{python_sitearch}/mercurial/locale
+
 
 %find_lang hg
 
