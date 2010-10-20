@@ -3,7 +3,7 @@
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
 Version: 1.6.4
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: GPLv2+
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -135,12 +135,13 @@ rm -rf $RPM_BUILD_ROOT%{python_sitearch}/mercurial/locale
 %find_lang hg
 
 grep -v locale %{name}-base.files > %{name}-base-filtered.files
-cat %{name}-base-filtered.files hg.lang > %{name}-base+hg.lang.files
+find $RPM_BUILD_ROOT%{python_sitearch}/{mercurial,hgext} -type d \
+| sed -e "s|^$RPM_BUILD_ROOT\(.*\)|%%dir \1|" >> %{name}-base-filtered.files
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f %{name}-base+hg.lang.files
+%files -f %{name}-base-filtered.files -f hg.lang
 %defattr(-,root,root,-)
 %doc CONTRIBUTORS COPYING doc/README doc/hg*.txt doc/hg*.html *.cgi contrib/*.fcgi
 %doc %attr(644,root,root) %{_mandir}/man?/hg*.gz
@@ -153,8 +154,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/mercurial
 %dir %{_sysconfdir}/mercurial/hgrc.d
 %config(noreplace) %{_sysconfdir}/mercurial/hgrc.d/mergetools.rc
-%dir %{python_sitearch}/mercurial
-%dir %{python_sitearch}/hgext
 
 %files -n emacs-%{pkg}
 %defattr(-,root,root,-)
@@ -174,6 +173,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Wed Oct 20 2010 Neal Becker <ndbecker2@gmail.com> - 1.6.4-3
+- Fixup unowned directories
+
 * Wed Oct  6 2010 Neal Becker <ndbecker2@gmail.com> - 1.6.4-3
 - patch i18n.py so hg will find moved locale files
 
