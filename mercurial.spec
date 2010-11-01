@@ -2,8 +2,8 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
-Version: 1.6.4
-Release: 4%{?dist}
+Version: 1.7
+Release: 3%{?dist}
 License: GPLv2+
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -12,7 +12,7 @@ Source1: mercurial-site-start.el
 Patch0: mercurial-i18n.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python python-devel
-BuildRequires: emacs emacs-el pkgconfig gettext
+BuildRequires: emacs emacs-el pkgconfig gettext python-docutils
 Requires: python
 Provides: hg = %{version}-%{release}
 
@@ -86,7 +86,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__python} setup.py install -O1 --root $RPM_BUILD_ROOT --prefix %{_prefix} --record=%{name}.files
 make install-doc DESTDIR=$RPM_BUILD_ROOT MANDIR=%{_mandir}
 
-grep -v 'hgk.py*' < %{name}.files > %{name}-base.files
+grep -v -e 'hgk.py*' -e %{python_sitearch}/mercurial/ -e %{python_sitearch}/hgext/ < %{name}.files > %{name}-base.files
 grep 'hgk.py*' < %{name}.files > %{name}-hgk.files
 
 install -D -m 755 contrib/hgk       $RPM_BUILD_ROOT%{_libexecdir}/mercurial/hgk
@@ -135,8 +135,6 @@ rm -rf $RPM_BUILD_ROOT%{python_sitearch}/mercurial/locale
 %find_lang hg
 
 grep -v locale %{name}-base.files > %{name}-base-filtered.files
-find $RPM_BUILD_ROOT%{python_sitearch}/{mercurial,hgext} -type d \
-| sed -e "s|^$RPM_BUILD_ROOT\(.*\)|%%dir \1|" >> %{name}-base-filtered.files
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -153,6 +151,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/zsh/site-functions/
 %dir %{_sysconfdir}/mercurial
 %dir %{_sysconfdir}/mercurial/hgrc.d
+%{python_sitearch}/mercurial
+%{python_sitearch}/hgext
 %config(noreplace) %{_sysconfdir}/mercurial/hgrc.d/mergetools.rc
 
 %files -n emacs-%{pkg}
@@ -173,6 +173,18 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Mon Nov  1 2010 Neal Becker <ndbecker2@gmail.com> - 1.7-3
+- BR python-docutils
+
+* Mon Nov  1 2010 Neal Becker <ndbecker2@gmail.com> - 1.7-2
+- Make that 1.7
+
+* Mon Nov  1 2010 Neal Becker <ndbecker2@gmail.com> - 1.7.0-1
+- Update to 1.7.0
+
+* Thu Oct 21 2010 Neal Becker <ndbecker2@gmail.com> - 1.6.4-4
+- Try another way to own directories
+
 * Wed Oct 20 2010 Neal Becker <ndbecker2@gmail.com> - 1.6.4-3
 - Fixup unowned directories
 
