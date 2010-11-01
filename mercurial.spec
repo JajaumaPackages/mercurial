@@ -3,7 +3,7 @@
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
 Version: 1.7
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPLv2+
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -12,7 +12,7 @@ Source1: mercurial-site-start.el
 Patch0: mercurial-i18n.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python python-devel
-BuildRequires: emacs emacs-el pkgconfig gettext
+BuildRequires: emacs emacs-el pkgconfig gettext python-docutils
 Requires: python
 Provides: hg = %{version}-%{release}
 
@@ -173,6 +173,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Mon Nov  1 2010 Neal Becker <ndbecker2@gmail.com> - 1.7-3
+- BR python-docutils
+
 * Mon Nov  1 2010 Neal Becker <ndbecker2@gmail.com> - 1.7-2
 - Make that 1.7
 
