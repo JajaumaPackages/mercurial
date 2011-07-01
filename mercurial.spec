@@ -2,8 +2,8 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
-Version: 1.8.4
-Release: 2%{?dist}
+Version: 1.9
+Release: 1%{?dist}
 License: GPLv2+
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -175,6 +175,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Fri Jul  1 2011 Neal Becker <ndbecker2@gmail.com> - 1.9-1
+- Update to 1.9
+
 * Thu Jun  2 2011 Neal Becker <ndbecker2@gmail.com> - 1.8.4-2
 - Add docutils-0.8 patch
 
