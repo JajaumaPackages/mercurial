@@ -3,7 +3,7 @@
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
 Version: 1.9.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv2+
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -150,7 +150,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/zsh/site-functions/_mercurial
 %{_bindir}/hg-ssh
 %dir %{_sysconfdir}/bash_completion.d/
-%dir %{_datadir}/zsh/site-functions/
+%dir %{_datadir}/zsh/
+%{_datadir}/zsh/site-functions/
 %dir %{_sysconfdir}/mercurial
 %dir %{_sysconfdir}/mercurial/hgrc.d
 %{python_sitearch}/mercurial
@@ -175,6 +176,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Tue Oct 11 2011 Neal Becker <ndbecker2@gmail.com> - 1.9.3-2
+- Fix br 744931 (unowned dir)
+
 * Sun Oct  2 2011 Neal Becker <ndbecker2@gmail.com> - 1.9.3-1
 - update to 1.9.3
 
