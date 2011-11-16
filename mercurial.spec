@@ -2,8 +2,8 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
-Version: 1.9.3
-Release: 2%{?dist}
+Version: 2.0
+Release: 1%{?dist}
 License: GPLv2+
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
@@ -176,6 +176,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Wed Nov 16 2011 Neal Becker <ndbecker2@gmail.com> - 2.0-1
+- Update to 2.0
+
 * Tue Oct 11 2011 Neal Becker <ndbecker2@gmail.com> - 1.9.3-2
 - Fix br 744931 (unowned dir)
 
