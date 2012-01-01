@@ -2,7 +2,7 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
-Version: 2.0
+Version: 2.0.2
 Release: 1%{?dist}
 License: GPLv2+
 Group: Development/Tools
@@ -176,6 +176,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Sun Jan  1 2012 Neal Becker <ndbecker2@gmail.com> - 2.0.2-1
+- Update to 2.0.2
+
 * Wed Nov 16 2011 Neal Becker <ndbecker2@gmail.com> - 2.0-1
 - Update to 2.0
 
