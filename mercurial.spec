@@ -2,12 +2,17 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
-Version: 2.0.2
-Release: 1%{?dist}
+Version: 2.1
+#Release: 1%{?dist}
+Release: 1.rc1%{?dist}
+
+%define upstreamversion %{version}-rc
+
 License: GPLv2+
 Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
-Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
+#Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
+Source0: http://www.selenic.com/mercurial/release/%{name}-%{upstreamversion}.tar.gz
 Source1: mercurial-site-start.el
 Patch0: mercurial-i18n.patch
 #Patch1: docutils-0.8.patch
