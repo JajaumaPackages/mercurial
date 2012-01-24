@@ -81,7 +81,8 @@ http://www.selenic.com/mercurial/wiki/index.cgi/UsingHgk for more
 documentation.
 
 %prep
-%setup -q
+#%setup -q
+%setup -q -n %{name}-%{upstreamversion}
 %patch0 -p0
 #%patch1 -p1
 
