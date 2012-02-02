@@ -3,10 +3,11 @@
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
 Version: 2.1
-#Release: 1%{?dist}
-Release: 1.rc1%{?dist}
+Release: 1%{?dist}
+#Release: 1.rc1%{?dist}
 
-%define upstreamversion %{version}-rc
+#%define upstreamversion %{version}-rc
+%define upstreamversion %{version}
 
 License: GPLv2+
 Group: Development/Tools
