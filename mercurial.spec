@@ -2,7 +2,7 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
-Version: 2.1
+Version: 2.1.1
 Release: 1%{?dist}
 #Release: 1.rc1%{?dist}
 
@@ -184,6 +184,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Sat Mar 10 2012 Neal Becker <ndbecker2@gmail.com> - 2.1.1-1
+- Update to 2.1.1
+
 * Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
 
