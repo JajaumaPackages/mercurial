@@ -113,7 +113,8 @@ mkdir -p $RPM_BUILD_ROOT%{emacs_lispdir}
 
 pushd contrib
 for file in mercurial.el mq.el; do
-  emacs -batch -l mercurial.el --no-site-file -f batch-byte-compile $file
+  #emacs -batch -l mercurial.el --no-site-file -f batch-byte-compile $file
+  %{_emacs_bytecompile} $file
   install -p -m 644 $file ${file}c $RPM_BUILD_ROOT%{emacs_lispdir}
   rm ${file}c
 done
