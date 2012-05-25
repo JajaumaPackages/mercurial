@@ -137,6 +137,7 @@ EOF
 install -m 644 hgk.rc $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
 
 cat > certs.rc <<EOF
+# see: http://mercurial.selenic.com/wiki/CACertificates
 [web]
 cacerts = /etc/pki/tls/certs/ca-bundle.crt
 EOF
