@@ -3,7 +3,7 @@
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
 Version: 2.2.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 #Release: 1.rc1%{?dist}
 
 #%define upstreamversion %{version}-rc
@@ -136,6 +136,12 @@ path=%{_libexecdir}/mercurial/hgk
 EOF
 install -m 644 hgk.rc $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
 
+cat > certs.rc <<EOF
+[web]
+cacerts = /etc/pki/tls/certs/ca-bundle.crt
+EOF
+install -m 644 certs.rc $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
+
 install -m 644 contrib/mergetools.hgrc $RPM_BUILD_ROOT%{_sysconfdir}/mercurial/hgrc.d/mergetools.rc
 
 mv $RPM_BUILD_ROOT%{python_sitearch}/mercurial/locale $RPM_BUILD_ROOT%{_datadir}/locale
@@ -184,6 +190,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Fri May 25 2012 Neal Becker <ndbecker2@gmail.com> - 2.2.1-2
+- Add certs.rc
+
 * Fri May  4 2012 Neal Becker <ndbecker2@gmail.com> - 2.2.1-1
 - update to 2.2.1
 
