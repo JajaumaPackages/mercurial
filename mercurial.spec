@@ -171,6 +171,7 @@ rm -rf $RPM_BUILD_ROOT
 %{python_sitearch}/mercurial
 %{python_sitearch}/hgext
 %config(noreplace) %{_sysconfdir}/mercurial/hgrc.d/mergetools.rc
+%config(noreplace) %{_sysconfdir}/mercurial/hgrc.d/certs.rc
 
 %files -n emacs-%{pkg}
 %defattr(-,root,root,-)
