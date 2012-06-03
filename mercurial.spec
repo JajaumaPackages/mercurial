@@ -2,8 +2,8 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
-Version: 2.2.1
-Release: 2%{?dist}
+Version: 2.2.2
+Release: 1%{?dist}
 #Release: 1.rc1%{?dist}
 
 #%define upstreamversion %{version}-rc
@@ -192,6 +192,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Sun Jun  3 2012 Neal Becker <ndbecker2@gmail.com> - 2.2.2-1
+- Update to 2.2.2
+
 * Fri May 25 2012 Neal Becker <ndbecker2@gmail.com> - 2.2.1-2
 - Add certs.rc
 
