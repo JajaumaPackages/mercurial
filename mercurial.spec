@@ -195,6 +195,9 @@ rm -rf $RPM_BUILD_ROOT
 * Mon Aug 13 2012 Neal Becker <ndbecker2@gmail.com> - 2.3-1
 - Update to 2.3
 
+* Fri Jul 20 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.2.3-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
+
 * Mon Jul  9 2012 Neal Becker <ndbecker2@gmail.com> - 2.2.3-1
 - Update to 2.2.3
 
