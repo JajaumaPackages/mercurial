@@ -3,7 +3,7 @@
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
 Version: 2.5.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 #Release: 1.rc1%{?dist}
 
 #%define upstreamversion %{version}-rc
@@ -158,7 +158,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}-base-filtered.files -f hg.lang
 %defattr(-,root,root,-)
-%doc CONTRIBUTORS COPYING doc/README doc/hg*.txt doc/hg*.html *.cgi contrib/*.fcgi
+%doc CONTRIBUTORS COPYING doc/README doc/hg*.txt doc/hg*.html *.cgi contrib/*.fcgi contrib/*.wsgi
 %doc %attr(644,root,root) %{_mandir}/man?/hg*.gz
 %doc %attr(644,root,root) contrib/*.svg contrib/sample.hgrc
 %config(noreplace) %{_sysconfdir}/bash_completion.d/mercurial.sh
@@ -192,6 +192,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Mon Mar 18 2013 nbecker <ndbecker2@gmail.com> - 2.5.2-2
+- Add hgweb.wsgi
+
 * Sat Mar  2 2013 nbecker <ndbecker2@gmail.com> - 2.5.2-1
 - Update to 2.5.2
 
