@@ -2,8 +2,8 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
-Version: 2.5.2
-Release: 2%{?dist}
+Version: 2.6
+Release: 1%{?dist}
 #Release: 1.rc1%{?dist}
 
 #%define upstreamversion %{version}-rc
@@ -192,6 +192,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Wed May  8 2013 nbecker <ndbecker2@gmail.com> - 2.6-1
+- Update to 2.6
+
 * Mon Mar 18 2013 nbecker <ndbecker2@gmail.com> - 2.5.2-2
 - Add hgweb.wsgi
 
