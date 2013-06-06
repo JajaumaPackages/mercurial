@@ -193,7 +193,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %changelog
 
-* Thur June 6 2013 nbecker <ndbecker2@gmail.com> - 2.6.2-1
+* Thu June 6 2013 nbecker <ndbecker2@gmail.com> - 2.6.2-1
 - Update to 2.6.2
 
 * Wed May  8 2013 nbecker <ndbecker2@gmail.com> - 2.6-1
