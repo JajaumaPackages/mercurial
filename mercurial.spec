@@ -2,7 +2,7 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
-Version: 2.8.1
+Version: 2.9
 Release: 1%{?dist}
 #Release: 1.rc1%{?dist}
 
@@ -192,6 +192,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Wed Feb  5 2014 nbecker <ndbecker2@gmail.com> - 2.9-1
+- Update to 2.9
+
 * Fri Nov  8 2013 nbecker <ndbecker2@gmail.com> - 2.8-1
 - Update to 2.8
 
