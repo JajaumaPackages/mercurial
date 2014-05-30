@@ -3,7 +3,7 @@
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
 Version: 3.0
-Release: %{?dist}
+Release: 1%{?dist}
 #Release: 1.rc1%{?dist}
 
 #%define upstreamversion %{version}-rc
@@ -192,6 +192,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Fri May 30 2014 nbecker <ndbecker2@gmail.com> - 3.0-1
+- fix Release
+
 * Fri May 30 2014 nbecker <ndbecker2@gmail.com> - 3.0-
 - Update to 3.0
 
