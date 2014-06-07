@@ -3,7 +3,7 @@
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
 Version: 3.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 #Release: 1.rc1%{?dist}
 
 #%define upstreamversion %{version}-rc
@@ -192,6 +192,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
 * Fri May 30 2014 nbecker <ndbecker2@gmail.com> - 3.0-1
 - fix Release
 
