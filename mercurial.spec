@@ -15,7 +15,7 @@ URL: http://www.selenic.com/mercurial/
 #Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
 Source0: http://www.selenic.com/mercurial/release/%{name}-%{upstreamversion}.tar.gz
 Source1: mercurial-site-start.el
-Patch0: mercurial-i18n.patch
+#Patch0: mercurial-i18n.patch
 #Patch1: docutils-0.8.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python python-devel
@@ -84,7 +84,7 @@ documentation.
 %prep
 #%setup -q
 %setup -q -n %{name}-%{upstreamversion}
-%patch0 -p0
+#%patch0 -p0
 #%patch1 -p1
 
 %build
@@ -160,7 +160,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %doc CONTRIBUTORS COPYING doc/README doc/hg*.txt doc/hg*.html *.cgi contrib/*.fcgi contrib/*.wsgi
 %doc %attr(644,root,root) %{_mandir}/man?/hg*.gz
-%doc %attr(644,root,root) contrib/*.svg contrib/sample.hgrc
+%doc %attr(644,root,root) contrib/*.svg
 %config(noreplace) %{_sysconfdir}/bash_completion.d/mercurial.sh
 %{_datadir}/zsh/site-functions/_mercurial
 %{_bindir}/hg-ssh
@@ -194,6 +194,10 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Tue Dec 16 2014 nbecker <ndbecker2@gmail.com> - 3.2-1
 - Update to 3.2.2
+
+* Sun Oct 19 2014 nbecker <ndbecker2@gmail.com> - 3.2-1.rc
+- Patch0 no longer needed?
+- Drop sample.hgrc (from upstream)
 
 * Sun Aug 17 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
