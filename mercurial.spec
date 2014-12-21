@@ -2,7 +2,7 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
-Version: 3.2.2
+Version: 3.2.3
 Release: 1%{?dist}
 # Release: 1.rc1%{?dist}
 
@@ -192,6 +192,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Sun Dec 21 2014 nbecker <ndbecker2@gmail.com> - 3.2.3-1
+- Fixes CVE-2014-9390
+
 * Tue Dec 16 2014 nbecker <ndbecker2@gmail.com> - 3.2-1
 - Update to 3.2.2
 
