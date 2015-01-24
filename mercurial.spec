@@ -3,7 +3,7 @@
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
 Version: 3.2.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 # Release: 1.rc1%{?dist}
 
 #% define upstreamversion %{version}-rc
@@ -18,7 +18,7 @@ Source1: mercurial-site-start.el
 #Patch0: mercurial-i18n.patch
 #Patch1: docutils-0.8.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildRequires: python python-devel
+BuildRequires: python python-devel bash-completion
 BuildRequires: emacs-nox emacs-el pkgconfig gettext python-docutils
 Requires: python
 Provides: hg = %{version}-%{release}
@@ -101,9 +101,9 @@ grep 'hgk.py*' < %{name}.files > %{name}-hgk.files
 install -D -m 755 contrib/hgk       $RPM_BUILD_ROOT%{_libexecdir}/mercurial/hgk
 install -m 755 contrib/hg-ssh       $RPM_BUILD_ROOT%{_bindir}
 
-bash_completion_dir=$RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d
+bash_completion_dir=$RPM_BUILD_ROOT$(pkg-config --variable=completionsdir bash-completion)
 mkdir -p $bash_completion_dir
-install -m 644 contrib/bash_completion $bash_completion_dir/mercurial.sh
+install -m 644 contrib/bash_completion $bash_completion_dir/hg
 
 zsh_completion_dir=$RPM_BUILD_ROOT%{_datadir}/zsh/site-functions
 mkdir -p $zsh_completion_dir
@@ -161,10 +161,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc CONTRIBUTORS COPYING doc/README doc/hg*.txt doc/hg*.html *.cgi contrib/*.fcgi contrib/*.wsgi
 %doc %attr(644,root,root) %{_mandir}/man?/hg*.gz
 %doc %attr(644,root,root) contrib/*.svg
-%config(noreplace) %{_sysconfdir}/bash_completion.d/mercurial.sh
 %{_datadir}/zsh/site-functions/_mercurial
 %{_bindir}/hg-ssh
-%dir %{_sysconfdir}/bash_completion.d/
+%{_datadir}/bash-completion/
 %dir %{_datadir}/zsh/
 %{_datadir}/zsh/site-functions/
 %dir %{_sysconfdir}/mercurial
@@ -192,6 +191,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Sat Jan 24 2015 Ville Skyttä <ville.skytta@iki.fi> - 3.2.3-2
+- Install bash completion to %%{_datadir}/bash-completion/completions
+
 * Sun Dec 21 2014 nbecker <ndbecker2@gmail.com> - 3.2.3-1
 - Fixes CVE-2014-9390
 
