@@ -2,8 +2,8 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
-Version: 3.2.3
-Release: 2%{?dist}
+Version: 3.2.4
+Release: 1%{?dist}
 # Release: 1.rc1%{?dist}
 
 #% define upstreamversion %{version}-rc
