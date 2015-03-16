@@ -143,8 +143,6 @@ cacerts = /etc/pki/tls/certs/ca-bundle.crt
 EOF
 install -m 644 certs.rc $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
 
-install -m 644 contrib/mergetools.hgrc $RPM_BUILD_ROOT%{_sysconfdir}/mercurial/hgrc.d/mergetools.rc
-
 mv $RPM_BUILD_ROOT%{python_sitearch}/mercurial/locale $RPM_BUILD_ROOT%{_datadir}/locale
 rm -rf $RPM_BUILD_ROOT%{python_sitearch}/mercurial/locale
 
@@ -170,7 +168,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/mercurial/hgrc.d
 %{python_sitearch}/mercurial
 %{python_sitearch}/hgext
-%config(noreplace) %{_sysconfdir}/mercurial/hgrc.d/mergetools.rc
 %config(noreplace) %{_sysconfdir}/mercurial/hgrc.d/certs.rc
 
 %files -n emacs-%{pkg}
@@ -191,6 +188,10 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Mon Mar 16 2015 Neal Becker <ndbecker2@gmail.com> - 3.3.2-1
+- Update to 3.3.2
+- upstream dropped mergetools.rc
+
 * Sat Jan 24 2015 Ville Skyttä <ville.skytta@iki.fi> - 3.2.3-2
 - Install bash completion to %%{_datadir}/bash-completion/completions
 
