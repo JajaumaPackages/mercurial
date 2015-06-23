@@ -170,6 +170,9 @@ rm -rf $RPM_BUILD_ROOT
 - Update to 3.4.1
 - Obsolete emacs-mercurial{-el}
 
+* Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.3.3-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Fri Apr  3 2015 Neal Becker <ndbecker2@gmail.com> - 3.3.3-1
 - update to 3.3.3
 
