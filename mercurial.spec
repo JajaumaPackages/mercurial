@@ -20,7 +20,7 @@ Source1: mercurial-site-start.el
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python python-devel bash-completion
 BuildRequires: emacs-nox emacs-el pkgconfig gettext python-docutils
-Requires: python
+Requires: python emacs-filesystem
 Provides: hg = %{version}-%{release}
 Obsoletes: emacs-mercurial <= 3.4.1, emacs-mercurial-el <= 3.4.1
 Provides: emacs-mercurial <= 3.4.1, emacs-mercurial-el <= 3.4.1
@@ -36,17 +36,6 @@ Extensions: http://www.selenic.com/mercurial/wiki/index.cgi/CategoryExtension
 %define pkg mercurial
 
 # If the emacs-el package has installed a pkgconfig file, use that to determine
-# install locations and Emacs version at build time, otherwise set defaults.
-%if %($(pkg-config emacs) ; echo $?)
-%define emacs_version 22.1
-%define emacs_lispdir %{_datadir}/emacs/site-lisp
-%define emacs_startdir %{_datadir}/emacs/site-lisp/site-start.d
-%else
-%define emacs_version %{expand:%(pkg-config emacs --modversion)}
-%define emacs_lispdir %{expand:%(pkg-config emacs --variable sitepkglispdir)}
-%define emacs_startdir %{expand:%(pkg-config emacs --variable sitestartdir)}
-%endif
-
 
 %package hgk
 Summary:	Hgk interface for mercurial
@@ -92,13 +81,13 @@ zsh_completion_dir=$RPM_BUILD_ROOT%{_datadir}/zsh/site-functions
 mkdir -p $zsh_completion_dir
 install -m 644 contrib/zsh_completion $zsh_completion_dir/_mercurial
 
-mkdir -p $RPM_BUILD_ROOT%{emacs_lispdir}/mercurial
+mkdir -p $RPM_BUILD_ROOT%{_emacs_sitelispdir}/mercurial
 
 pushd contrib
 for file in mercurial.el mq.el; do
   #emacs -batch -l mercurial.el --no-site-file -f batch-byte-compile $file
   %{_emacs_bytecompile} $file
-  install -p -m 644 $file ${file}c $RPM_BUILD_ROOT%{emacs_lispdir}/mercurial
+  install -p -m 644 $file ${file}c $RPM_BUILD_ROOT%{_emacs_sitelispdir}/mercurial
   rm ${file}c
 done
 popd
@@ -107,7 +96,7 @@ popd
 
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
 
-mkdir -p $RPM_BUILD_ROOT%{emacs_startdir} && install -m644 %SOURCE1 $RPM_BUILD_ROOT%{emacs_startdir}
+mkdir -p $RPM_BUILD_ROOT%{_emacs_sitestartdir} && install -m644 %SOURCE1 $RPM_BUILD_ROOT%{_emacs_sitestartdir}
 
 cat >hgk.rc <<EOF
 [extensions]
@@ -151,9 +140,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/mercurial/hgrc.d
 %{python_sitearch}/mercurial
 %{python_sitearch}/hgext
-%{emacs_lispdir}/mercurial/*.elc
-%{emacs_startdir}/*.el
-%{emacs_lispdir}/mercurial/*.el
+%{_emacs_sitelispdir}/mercurial
+%{_emacs_sitestartdir}/*.el
 
 %config(noreplace) %{_sysconfdir}/mercurial/hgrc.d/certs.rc
 
@@ -169,6 +157,8 @@ rm -rf $RPM_BUILD_ROOT
 * Tue Jun 23 2015 Neal Becker <ndbecker2@gmail.com> - 3.4.1-1
 - Update to 3.4.1
 - Obsolete emacs-mercurial{-el}
+- own _emacs_sitelispdir/mercurial
+- use standard emacs macros
 
 * Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.3.3-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
