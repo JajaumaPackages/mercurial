@@ -2,7 +2,7 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
-Version: 3.3.3
+Version: 3.4.1
 Release: 1%{?dist}
 # Release: 1.rc1%{?dist}
 
@@ -22,6 +22,8 @@ BuildRequires: python python-devel bash-completion
 BuildRequires: emacs-nox emacs-el pkgconfig gettext python-docutils
 Requires: python
 Provides: hg = %{version}-%{release}
+Obsoletes: emacs-mercurial <= 3.4.1, emacs-mercurial-el <= 3.4.1
+Provides: emacs-mercurial <= 3.4.1, emacs-mercurial-el <= 3.4.1
 
 %description
 Mercurial is a fast, lightweight source control management system designed
@@ -45,25 +47,6 @@ Extensions: http://www.selenic.com/mercurial/wiki/index.cgi/CategoryExtension
 %define emacs_startdir %{expand:%(pkg-config emacs --variable sitestartdir)}
 %endif
 
-%package -n emacs-%{pkg}
-Summary:	Mercurial version control system support for Emacs
-Group:		Applications/Editors
-Requires:	hg = %{version}-%{release}, emacs-common
-Requires:       emacs(bin) >= %{emacs_version}
-Obsoletes:	%{pkg}-emacs
-
-%description -n emacs-%{pkg}
-Contains byte compiled elisp packages for %{pkg}.
-To get started: start emacs, load hg-mode with M-x hg-mode, and show 
-help with C-c h h
-
-%package -n emacs-%{pkg}-el
-Summary:        Elisp source files for %{pkg} under GNU Emacs
-Group:          Applications/Editors
-Requires:       emacs-%{pkg} = %{version}-%{release}
-
-%description -n emacs-%{pkg}-el
-This package contains the elisp source files for %{pkg} under GNU Emacs.
 
 %package hgk
 Summary:	Hgk interface for mercurial
@@ -109,13 +92,13 @@ zsh_completion_dir=$RPM_BUILD_ROOT%{_datadir}/zsh/site-functions
 mkdir -p $zsh_completion_dir
 install -m 644 contrib/zsh_completion $zsh_completion_dir/_mercurial
 
-mkdir -p $RPM_BUILD_ROOT%{emacs_lispdir}
+mkdir -p $RPM_BUILD_ROOT%{emacs_lispdir}/mercurial
 
 pushd contrib
 for file in mercurial.el mq.el; do
   #emacs -batch -l mercurial.el --no-site-file -f batch-byte-compile $file
   %{_emacs_bytecompile} $file
-  install -p -m 644 $file ${file}c $RPM_BUILD_ROOT%{emacs_lispdir}
+  install -p -m 644 $file ${file}c $RPM_BUILD_ROOT%{emacs_lispdir}/mercurial
   rm ${file}c
 done
 popd
@@ -168,16 +151,11 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/mercurial/hgrc.d
 %{python_sitearch}/mercurial
 %{python_sitearch}/hgext
-%config(noreplace) %{_sysconfdir}/mercurial/hgrc.d/certs.rc
-
-%files -n emacs-%{pkg}
-%defattr(-,root,root,-)
-%{emacs_lispdir}/*.elc
+%{emacs_lispdir}/mercurial/*.elc
 %{emacs_startdir}/*.el
+%{emacs_lispdir}/mercurial/*.el
 
-%files -n emacs-%{pkg}-el
-%defattr(-,root,root,-)
-%{emacs_lispdir}/*.el
+%config(noreplace) %{_sysconfdir}/mercurial/hgrc.d/certs.rc
 
 %files hgk -f %{name}-hgk.files
 %defattr(-,root,root,-)
@@ -188,6 +166,10 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Tue Jun 23 2015 Neal Becker <ndbecker2@gmail.com> - 3.4.1-1
+- Update to 3.4.1
+- Obsolete emacs-mercurial{-el}
+
 * Fri Apr  3 2015 Neal Becker <ndbecker2@gmail.com> - 3.3.3-1
 - update to 3.3.3
 
