@@ -2,7 +2,7 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
-Version: 3.5
+Version: 3.5.1
 Release: 1%{?dist}
 # Release: 1.rc1%{?dist}
 
@@ -154,6 +154,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Fri Sep 11 2015 Neal Becker <ndbecker2@gmail.com> - 3.5.1-1
+- Update to 3.5.1
+
 * Wed Aug 12 2015 Neal Becker <ndbecker2@gmail.com> - 3.5-1
 - Update to 3.5
 
