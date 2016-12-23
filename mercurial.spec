@@ -2,13 +2,9 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
-<<<<<<< HEAD
 Version: 4.0.1
 Release: 1%{?dist}
-=======
-Version: 3.8.1
-Release: 2%{?dist}
->>>>>>> efef1b380f50ab9e50ef5877f503b4040df8a62b
+
 # Release: 1.rc1%{?dist}
 
 #% define upstreamversion %{version}-rc
