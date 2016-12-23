@@ -2,8 +2,13 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
+<<<<<<< HEAD
 Version: 4.0.1
 Release: 1%{?dist}
+=======
+Version: 3.8.1
+Release: 2%{?dist}
+>>>>>>> efef1b380f50ab9e50ef5877f503b4040df8a62b
 # Release: 1.rc1%{?dist}
 
 #% define upstreamversion %{version}-rc
@@ -156,6 +161,9 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Fri Dec 23 2016 Neal Becker <nbecker@nbecker2> - 4.0.1-1
 - Update to 4.0.1
+
+* Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.8.1-2
+- https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
 
 * Tue May 03 2016 Neal Becker <ndbecker2@gmail.com> - 3.8.1-1
 - Update to 3.8.1
