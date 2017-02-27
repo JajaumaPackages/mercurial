@@ -2,8 +2,8 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
-Version: 4.0.1
-Release: 2%{?dist}
+Version: 4.1
+Release: 1%{?dist}
 
 # Release: 1.rc1%{?dist}
 
@@ -155,6 +155,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Mon Feb 27 2017 Neal Becker <nbecker@nbecker2> - 4.1-1
+- Update to 4.1
+
 * Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 4.0.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
