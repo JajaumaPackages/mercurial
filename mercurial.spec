@@ -2,7 +2,7 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
-Version: 4.1
+Version: 4.2
 Release: 1%{?dist}
 
 # Release: 1.rc1%{?dist}
