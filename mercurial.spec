@@ -2,8 +2,8 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
-Version: 4.2.1
-Release: 3%{?dist}
+Version: 4.2.3
+Release: 1%{?dist}
 
 # Release: 1.rc1%{?dist}
 
@@ -155,6 +155,10 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Fri Aug 11 2017 Petr Stodulka <pstodulk@redhat.com> - 4.2.3-1
+- Update to 4.2.3
+- Resolves: CVE-2017-1000115 CVE-2017-1000116
+
 * Thu Aug 03 2017 Fedora Release Engineering <releng@fedoraproject.org> - 4.2.1-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
 
@@ -182,7 +186,7 @@ rm -rf $RPM_BUILD_ROOT
 * Tue Mar 29 2016 Neal Becker <ndbecker2@gmail.com> - 3.7.3-1
 - Update to 3.7.3
 
-* Fri Feb 25 2016 Neal Becker <ndbecker2@gmail.com> - 3.7.1-1
+* Thu Feb 25 2016 Neal Becker <ndbecker2@gmail.com> - 3.7.1-1
 - Update to 3.7.1
 
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 3.6.3-2
