@@ -2,7 +2,7 @@
 
 Summary: Mercurial -- a distributed SCM
 Name: mercurial
-Version: 4.3.3
+Version: 4.4
 Release: 1%{?dist}
 
 # Release: 1.rc1%{?dist}
@@ -155,6 +155,9 @@ rm -rf $RPM_BUILD_ROOT
 ##cd tests && %{__python} run-tests.py
 
 %changelog
+* Tue Nov 07 2017 Jajauma's Packages <jajauma@yandex.ru> - 4.4-1
+- Update to latest upstream release
+
 * Wed Oct 18 2017 Jajauma's Packages <jajauma@yandex.ru> - 4.3.3-1
 - Update to latest upstream release
 
